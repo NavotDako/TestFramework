@@ -46,6 +46,18 @@
             <url>https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-server-standalone</url>
         </repository>
 
+        <!--<repository>-->
+            <!--<releases>-->
+                <!--<enabled>true</enabled>-->
+                <!--<updatePolicy>always</updatePolicy>-->
+                <!--<checksumPolicy>fail</checksumPolicy>-->
+            <!--</releases>-->
+            <!--<id>Experitest.repo1</id>-->
+            <!--<name>YourName</name>-->
+            <!--<url>http://192.168.2.13/repo/</url>-->
+            <!--<layout>default</layout>-->
+        <!--</repository>-->
+
         <repository>
             <releases>
                 <enabled>true</enabled>
@@ -54,7 +66,7 @@
             </releases>
             <id>Experitest.repo1</id>
             <name>YourName</name>
-            <url>http://192.168.2.13/repo/</url>
+            <url>https://atb.experitest.com/repo/</url>
             <layout>default</layout>
         </repository>
 
@@ -76,13 +88,25 @@
         <dependency>
             <groupId>com.experitest</groupId>
             <artifactId>appium-seetest-extension</artifactId>
-            <version>12.0</version>
+            <version>12.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.experitest</groupId>
             <artifactId>seetest-client</artifactId>
-            <version>12.0</version>
+            <version>12.1</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>com.experitest</groupId>-->
+            <!--<artifactId>reporter-testng</artifactId>-->
+            <!--<version>12.2</version>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.experitest</groupId>
+            <artifactId>reporter-junit4</artifactId>
+            <version>12.2</version>
         </dependency>
 
         <dependency>
@@ -97,11 +121,12 @@
             <version>1.11.407</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-server-standalone</artifactId>
-            <version>2.53.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.seleniumhq.selenium</groupId>-->
+            <!--<artifactId>selenium-server-standalone</artifactId>-->
+            <!--<version>2.53.0</version>-->
+        <!--</dependency>-->
+
 
     </dependencies>
 

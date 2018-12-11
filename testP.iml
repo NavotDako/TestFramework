@@ -11,6 +11,15 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/reporter-junit4-12.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
     <orderEntry type="library" name="Maven: org.json:json:20170516" level="project" />
     <orderEntry type="library" name="Maven: com.experitest:appium:4.1.2" level="project" />
     <orderEntry type="library" name="Maven: com.experitest:aspectjweaver:1.8.9" level="project" />
@@ -68,8 +77,8 @@
     <orderEntry type="library" name="Maven: com.experitest:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" name="Maven: com.experitest:xmlrpc-client:3.1.2" level="project" />
     <orderEntry type="library" name="Maven: com.experitest:xmlrpc-common:3.1.2" level="project" />
-    <orderEntry type="library" name="Maven: com.experitest:appium-seetest-extension:12.0" level="project" />
-    <orderEntry type="library" name="Maven: com.experitest:seetest-client:12.0" level="project" />
+    <orderEntry type="library" name="Maven: com.experitest:appium-seetest-extension:12.1" level="project" />
+    <orderEntry type="library" name="Maven: com.experitest:seetest-client:12.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.xmlrpc:xmlrpc-client:3.1.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.xmlrpc:xmlrpc-common:3.1.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.ws.commons.util:ws-commons-util:1.0.2" level="project" />
@@ -80,8 +89,9 @@
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpmime:4.5.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: commons-io:commons-io:2.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: io.fastjson:boon:0.33" level="project" />
-    <orderEntry type="library" scope="RUNTIME" name="Maven: com.experitest:manager-client-api:12.0" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Maven: com.experitest:manager-client-api:12.1" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.slf4j:slf4j-api:1.7.7" level="project" />
+    <orderEntry type="library" name="Maven: com.experitest:reporter-junit4:12.2" level="project" />
     <orderEntry type="library" name="Maven: com.mashape.unirest:unirest-java:1.4.9" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpasyncclient:4.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpcore-nio:4.4.4" level="project" />
@@ -240,6 +250,5 @@
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.8.1" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-models:1.11.407" level="project" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-java-sdk-swf-libraries:1.11.22" level="project" />
-    <orderEntry type="library" name="Maven: org.seleniumhq.selenium:selenium-server-standalone:2.53.0" level="project" />
   </component>
 </module>

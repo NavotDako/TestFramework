@@ -16,7 +16,7 @@ public class Parallel {
 
     public static void main(String[] args) {
 
-        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.DEEP);
+        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.MINE);
         List<String> devicesList = cloudServer.getAllAvailableDevices("all");
 
         ExecutorService executorService = Executors.newFixedThreadPool(devicesList.size());

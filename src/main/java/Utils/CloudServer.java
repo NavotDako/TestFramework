@@ -58,10 +58,11 @@ public class CloudServer {
     }
 
     public enum CloudServerNameEnum {
-        MINE, QA, RELEASE, DIKLA, DEEP, ESXI
+        MINE, QA, RELEASE, DIKLA, DEEP, ESXI, ATB
     }
 
     private void updateCloudDetails() {
+
         switch (cloudName) {
             case MINE:
                 HOST = "192.168.2.13";
@@ -70,7 +71,16 @@ public class CloudServer {
                 PASS = "Experitest2012";
                 PROJECT = "Default";
                 SECURED = false;
-                ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoyLCJ4cC5tIjoiTVRVek1UUXdNemM1T0RRMU53IiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NDY3NjM3OTgsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.uUzgJmI5vjF39iAtnwab4Wc-L41FQhjouo2D55OYCg4";
+                ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoyLCJ4cC5tIjoiTVRVME16a3hPRFl3T1RVeE1RIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NTkyNzg2MTAsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.tFnvZGwN7_qNl9MJltbbIUFxXdtIKKG9SR0vrfYXqAE";
+                break;
+            case ATB:
+                HOST = "https://atb.experitest.com";
+                PORT = "443";
+                USER = "amit.nahum";
+                PASS = "Zz123456";
+                PROJECT = "Default";
+                SECURED = false;
+                ACCESSKEY = " eyJ4cC51IjoxMDI5ODQsInhwLnAiOjIsInhwLm0iOiJNQSIsImFsZyI6IkhTMjU2In0.eyJleHAiOjE4NTY5NjA4NzQsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.YBWxHU0OUQIFNTa0J9rGdZz2vmqRI-lvhHfxbcmHyrY";
                 break;
             case ESXI:
                 HOST = "https://rndvmcloud.experitest.com";

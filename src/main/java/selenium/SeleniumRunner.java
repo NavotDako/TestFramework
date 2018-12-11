@@ -27,14 +27,9 @@ public class SeleniumRunner {
         int threadNum = 40;
         r = new Random();
 
-        CloudServer cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.ESXI);
+        CloudServer cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.ATB);
         ACCESS_KEY = cloudServer.ACCESSKEY;
         url = new URL(cloudServer.gridURL);
-
-
-//        ChromeOptions options = new ChromeOptions();
-////        options.addExtensions(new File("C:\\Users\\DELL\\Downloads\\SeeTestProductsVerification\\testP\\lib\\extension_1_3_0_0.crx"));
-////        dc.setCapability(ChromeOptions.CAPABILITY, options);
 
         for (int j = 0; j < 10; j++) {
             ExecutorService executorService = Executors.newFixedThreadPool(threadNum);
@@ -50,6 +45,7 @@ public class SeleniumRunner {
                 dc.setCapability("takeScreenshots", true);
                 dc.setCapability("testName", "Test No. " + i);
                 dc.setCapability("newSessionWaitTimeout", 60 * 60 * 8);
+
                 SeleniumTest test = new SeleniumTest("Thread-" + i, dc);
                 res.add(executorService.submit(test));
             }
