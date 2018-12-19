@@ -3,6 +3,7 @@ package somepack;
 
 import Utils.CloudServer;
 
+import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -13,6 +14,7 @@ public class Parallel {
 
     static CloudServer cloudServer;
     static boolean appium = true;
+    public static SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
 
     public static void main(String[] args) {
 

@@ -59,6 +59,7 @@ public class AppiumTest implements Runnable {
         try {
             setup();
         } catch (Exception e) {
+            e.printStackTrace();
             handleSetupFailure(e);
             return;
         }
@@ -66,6 +67,7 @@ public class AppiumTest implements Runnable {
         try {
             test();
         } catch (Exception e) {
+            e.printStackTrace();
             handleTestFailure(e);
         }
 
@@ -158,7 +160,8 @@ public class AppiumTest implements Runnable {
         }
         new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@alt='Experitest Logo']")));
         driver.findElement(By.xpath("//*[@alt='Experitest Logo']"));
-
+        SeeTestClient client = new SeeTestClient(driver);
+        client.setReportStatus("Passed","NICE");
         logTestPassed();
     }
 
@@ -189,7 +192,7 @@ public class AppiumTest implements Runnable {
         driver.getPageSource();
         System.out.println(Utilities.getTime() + "\t" + threadName + " -- Failed --");
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\t -- Failed --\t" + threadName + "\t" + reportURL + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\t -- Failed --\t" + String.format("%+50s",threadName) + "\t" + reportURL + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -198,7 +201,7 @@ public class AppiumTest implements Runnable {
 
     private void handleSetupFailure(Exception e) {
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tSetup Failed\t" + threadName + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tSetup Failed\t" + String.format("%+50s",threadName) + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -210,7 +213,7 @@ public class AppiumTest implements Runnable {
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Test Passed");
 
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tPassed\t" + threadName + "\t" + reportURL);
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tPassed\t" + String.format("%+50s",threadName) + "\t" + reportURL);
         } catch (IOException e1) {
             e1.printStackTrace();
         }
