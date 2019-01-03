@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -93,12 +94,14 @@ public class AppiumTest implements Runnable {
         }
 //        dc.setCapability("reportDirectory", "c:\\temp");
         dc.setCapability("reportFormat", "xml");
+        dc.setCapability("testName", serial + "_" + iteration);
         dc.setCapability("newSessionWaitTimeout", "600");
 
         if (os.equals("ios")) {
             dc.setCapability(MobileCapabilityType.PLATFORM_NAME, "ios");
             dc.setCapability(MobileCapabilityType.DEVICE_NAME, "ios");
             dc.setCapability(MobileCapabilityType.UDID, serial);
+//            dc.setCapability(MobileCapabilityType.APP, "cloud:uniqueName=unique");
             dc.setCapability(MobileCapabilityType.APP, "cloud:com.experitest.ExperiBank");
 
             dc.setCapability(IOSMobileCapabilityType.BUNDLE_ID, "com.experitest.ExperiBank");
@@ -120,20 +123,31 @@ public class AppiumTest implements Runnable {
 //            System.out.println(Utilities.getTime() + "\t" + threadName + "\tAndroid Driver Created");
         }
         reportURL = (String) driver.getCapabilities().getCapability("reportUrl");
-        System.out.println(Utilities.getTime() + "\t" + threadName + " - Setup Passed - "+reportURL);
+        System.out.println(Utilities.getTime() + "\t" + threadName + " - Setup Passed - " + reportURL);
 
     }
 
-    private void test() throws InterruptedException {
+    private void test() {
 
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Test Starting");
 
         SeeTestClient c = new SeeTestClient(driver);
-        c.getCurrentApplicationName();
+        System.out.println(Utilities.getTime() + "\t" + threadName + "\tgetCurrentApplicationName -\t" + c.getCurrentApplicationName().replaceAll("\n", "\t"));
+
+        if (!os.equals("ios")) {
+
+            driver.findElement(By.xpath("//*[@id='usernameTextField']")).sendKeys("company");
+            driver.findElement(By.xpath("//*[@id='passwordTextField']")).sendKeys("company");
+            driver.findElement(By.xpath("//*[@text='Login']")).click();
+
+            Set<String> contexts = driver.getContextHandles();
+            for (String context : contexts) {
+                System.out.println("Context: " + context);
+            }
+        }
         driver.closeApp();
 
         c.launch("http://www.google.com", true, true);
-//        List<Long> i = (List<Long>) driver.executeScript("return [1,2,3]");
 
         try {
             driver.findElement(By.xpath("//G-FLAT-BUTTON")).click();
@@ -160,8 +174,9 @@ public class AppiumTest implements Runnable {
         }
         new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@alt='Experitest Logo']")));
         driver.findElement(By.xpath("//*[@alt='Experitest Logo']"));
-        SeeTestClient client = new SeeTestClient(driver);
-        client.setReportStatus("Passed","NICE");
+
+        c.setReportStatus("Passed", "NICE");
+
         logTestPassed();
     }
 
@@ -189,19 +204,23 @@ public class AppiumTest implements Runnable {
     }
 
     private void handleTestFailure(Exception e) {
-        driver.getPageSource();
         System.out.println(Utilities.getTime() + "\t" + threadName + " -- Failed --");
+        e.printStackTrace();
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\t -- Failed --\t" + String.format("%+50s",threadName) + "\t" + reportURL + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
+            driver.getPageSource();
+        } catch (Exception e1) {
+            System.out.println(Utilities.getTime() + "\t" + threadName + " - getPageSource Failed");
+        }
+        try {
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\t -- Failed --\t" + String.format("%-40s", threadName) + "\t" + reportURL + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
-        e.printStackTrace();
     }
 
     private void handleSetupFailure(Exception e) {
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tSetup Failed\t" + String.format("%+50s",threadName) + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tSetup Failed\t" + String.format("%-40s", threadName) + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
         } catch (IOException e1) {
             e1.printStackTrace();
         }
@@ -213,7 +232,7 @@ public class AppiumTest implements Runnable {
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Test Passed");
 
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tPassed\t" + String.format("%+50s",threadName) + "\t" + reportURL);
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\tPassed\t" + String.format("%-40s", threadName) + "\t" + reportURL);
         } catch (IOException e1) {
             e1.printStackTrace();
         }

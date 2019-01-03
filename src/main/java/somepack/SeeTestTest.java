@@ -22,8 +22,8 @@ public class SeeTestTest implements Runnable {
 
     public static void main(String[] args) {
         parallel = false;
-        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.QA);
-        SeeTestTest test = new SeeTestTest("636cb7a36d429661e6be6d70e1447a66268f73ff");
+        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.RELEASE);
+        SeeTestTest test = new SeeTestTest("e306fb3224fe2fbef2d1eb60118ee4ad7b7bf902");
         Thread t = new Thread(test);
         t.start();
     }
@@ -59,7 +59,7 @@ public class SeeTestTest implements Runnable {
         System.out.println(threadName + " - starting init");
         if (remote) {
             grid = new GridClient(cloudServer.ACCESSKEY, cloudServer.HOST);
-            grid.enableVideoRecording();
+//            grid.enableVideoRecording();
 
             client = grid.lockDeviceForExecution("Untitled", "@serialnumber='" + serial + "'", 10, 50000);
         } else {
@@ -71,7 +71,12 @@ public class SeeTestTest implements Runnable {
     }
 
     private void test() {
+
         System.out.println(threadName + " - starting test");
+        System.out.println(client.getVisualDump("non-instrumened"));
+        client.setProperty("safari.webview.include","true");
+        System.out.println(client.getVisualDump("non-instrumened"));
+
         if (client.getDeviceProperty("device.os").equals("ANDROID")) {
 //            client.install("C:\\Program Files (x86)\\Experitest\\SeeTest 12.1\\bin\\ipas\\eribank.apk", true, false);
 //            client.launch("com.experitest.ExperiBank/.LoginActivity", true, true);

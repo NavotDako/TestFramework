@@ -12,7 +12,7 @@ public class Utilities {
 
     public static String getTime() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY HH:mm:ss.SSS");
-        return sdf.format(new Date(System.currentTimeMillis()));
+        return sdf.format(new Date(System.currentTimeMillis()))+":";
     }
 
     public static synchronized void log(String message) throws IOException {
