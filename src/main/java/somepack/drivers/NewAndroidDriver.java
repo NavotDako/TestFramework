@@ -36,7 +36,7 @@ public class NewAndroidDriver extends AndroidDriver {
 
         super.log(sessionId, commandName, toLog, when);
 
-        System.out.println(String.format("%-70s%-100s", Parallel.sdf.format(new Date(System.currentTimeMillis())) + " " + deviceID ,when + ": " + commandName + " toLog:" + toLog));
+        System.out.println(String.format("%-70s%-100s", Utils.Utilities.getTime() + "\t" + deviceID ,when + ": " + commandName + " toLog:" + toLog));
 //        if (deviceName != null) {
 //            Utils.writeToDeviceLog(deviceName, sdf.format(new Date(System.currentTimeMillis())) + when + ": " + commandName + " toLog:" + toLog);
 //

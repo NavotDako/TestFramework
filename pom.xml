@@ -103,11 +103,11 @@
             <!--<version>12.2</version>-->
         <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.experitest</groupId>
-            <artifactId>reporter-junit4</artifactId>
-            <version>12.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.experitest</groupId>-->
+            <!--<artifactId>reporter-junit4</artifactId>-->
+            <!--<version>12.2</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>com.mashape.unirest</groupId>

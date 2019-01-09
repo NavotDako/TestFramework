@@ -1,13 +1,11 @@
 package selenium.Single;
 
-import com.experitest.reporter.junit4.ReporterRunner;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
 
-@RunWith(ReporterRunner.class)
 public class SingleSeleniumTest extends SingleSeleniumBase {
 
 

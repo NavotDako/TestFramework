@@ -4,8 +4,6 @@ import Utils.CloudServer;
 import Utils.Utilities;
 import com.experitest.appium.SeeTestClient;
 import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.android.AndroidDriver;
-import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
 import io.appium.java_client.remote.IOSMobileCapabilityType;
 import io.appium.java_client.remote.MobileCapabilityType;
@@ -19,7 +17,6 @@ import somepack.drivers.NewIOSDriver;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
@@ -38,6 +35,7 @@ public class AppiumTest implements Runnable {
     private String os;
     private String threadName;
     private String reportURL;
+    SeeTestClient client = null;
 
     AppiumTest(String serial, int iteration) {
         this.serial = serial;
@@ -92,7 +90,7 @@ public class AppiumTest implements Runnable {
         } else {
             url = "http://localhost:8889/wd/hub";
         }
-//        dc.setCapability("reportDirectory", "c:\\temp");
+//        dc.setCapability("reportDirectory", "client:\\temp");
         dc.setCapability("reportFormat", "xml");
         dc.setCapability("testName", serial + "_" + iteration);
         dc.setCapability("newSessionWaitTimeout", "600");
@@ -125,14 +123,19 @@ public class AppiumTest implements Runnable {
         reportURL = (String) driver.getCapabilities().getCapability("reportUrl");
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Setup Passed - " + reportURL);
 
+//        driver.manage().timeouts().implicitlyWait()
+        client = new SeeTestClient(driver);
+
+        client.startLoggingDevice("c:\\Temp\\" + threadName + "_" + Utilities.getTimeForFileName() + ".log");
+//        String s = client.uploadFile("C:\\Users\\DELL\\Desktop\\aaaaaa.jpg");
+//        System.out.println(s);
+//        client.run("adb push /private/var/folders/zz/zyxvpxvq6csfxvn_n0000000000000/T/headless/"+s+" /sdcard");
     }
 
     private void test() {
 
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Test Starting");
-
-        SeeTestClient c = new SeeTestClient(driver);
-        System.out.println(Utilities.getTime() + "\t" + threadName + "\tgetCurrentApplicationName -\t" + c.getCurrentApplicationName().replaceAll("\n", "\t"));
+        System.out.println(Utilities.getTime() + "\t" + threadName + " - getCurrentApplicationName - " + client.getCurrentApplicationName().replaceAll("\n", "\t"));
 
         if (!os.equals("ios")) {
 
@@ -142,40 +145,41 @@ public class AppiumTest implements Runnable {
 
             Set<String> contexts = driver.getContextHandles();
             for (String context : contexts) {
-                System.out.println("Context: " + context);
+                System.out.println(Utilities.getTime() + "\t" + threadName + "\tContext: " + context);
             }
         }
         driver.closeApp();
-
-        c.launch("http://www.google.com", true, true);
+        client.launch("http://www.google.com", true, true);
 
         try {
             driver.findElement(By.xpath("//G-FLAT-BUTTON")).click();
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
 
         try {
             driver.findElement(By.xpath("//*[@id='infobar_close_button']")).click();
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
 
         driver.context("WEBVIEW_1");
+
+        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@name='q']")).sendKeys("experitest");
+        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
+
         driver.findElement(By.xpath("//*[@class='Tg7LZd']")).click();
 
         tryToHandlePopup("//*[@text='Change to English' and @class='ZyXQnc']");
         tryToHandlePopup("//*[@id='button_secondary' and @text='Block']");
+        tryToHandlePopup("//*[@text='Change to English' and @class='ZyXQnc']");
 
         driver.findElement(By.xpath("//*[@text='https://experitest.com' or (@text='Experitest' and @class='MUxGbd v0nnCb') or (@text='https://experitest.com' and @class='qzEoUe')]")).click();
         try {
             driver.findElement(By.xpath("//*[@text='https://experitest.com' or (@text='Experitest' and @class='MUxGbd v0nnCb') or (@text='https://experitest.com' and @class='qzEoUe')]")).click();
-        } catch (Exception e) {
+        } catch (Exception e) {}
 
-        }
-        new WebDriverWait(driver, 30).until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@alt='Experitest Logo']")));
+        driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@alt='Experitest Logo']"));
 
-        c.setReportStatus("Passed", "NICE");
+        client.setReportStatus("Passed", "NICE");
 
         logTestPassed();
     }
@@ -186,8 +190,7 @@ public class AppiumTest implements Runnable {
             new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(pop)));
             Thread.sleep(2000);
             driver.findElement(By.xpath(pop)).click();
-            driver.findElement(By.xpath(pop)).click();
-            driver.findElement(By.xpath(pop)).click();
+            Thread.sleep(2000);
             driver.findElement(By.xpath(pop)).click();
             Thread.sleep(2000);
             driver.findElement(By.xpath(pop)).click();
@@ -197,8 +200,9 @@ public class AppiumTest implements Runnable {
     }
 
     private void tearDown() {
+        client.stopLoggingDevice();
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Ending Test");
-        System.out.println(driver.getCapabilities().toString());
+        System.out.println(Utilities.getTime() + "\t" + driver.getCapabilities().toString());
         driver.quit();
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Done");
     }

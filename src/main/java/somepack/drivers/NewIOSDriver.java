@@ -32,7 +32,7 @@ public class NewIOSDriver extends IOSDriver {
     @Override
     protected void log(SessionId sessionId, String commandName, Object toLog, When when) {
 
-        System.out.println(String.format("%-70s%-100s", Parallel.sdf.format(new Date(System.currentTimeMillis())) + " " + deviceID ,when + ": " + commandName + " toLog:" + toLog));
+        System.out.println(String.format("%-70s%-100s", Utils.Utilities.getTime() + "\t" + deviceID ,when + ": " + commandName + " toLog:" + toLog));
         super.log(sessionId, commandName, toLog, when);
 
     }

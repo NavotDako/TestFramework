@@ -61,21 +61,21 @@ public class SeeTestTest implements Runnable {
             grid = new GridClient(cloudServer.ACCESSKEY, cloudServer.HOST);
 //            grid.enableVideoRecording();
 
-            client = grid.lockDeviceForExecution("Untitled", "@serialnumber='" + serial + "'", 10, 50000);
+            client = grid.lockDeviceForExecution("Untitled", "@serialnumber='" + serial + "'", 100, 50000);
         } else {
             client = new Client("localhost", 8889, true);
             System.out.println("starting..");
             client.waitForDevice("@serialnumber='" + serial + "'", 300000);
         }
-        client.setReporter("xml", "c:\\temp", "test1");
+        client.setReporter("xml", "client:\\temp", "test1");
     }
 
     private void test() {
 
         System.out.println(threadName + " - starting test");
-        System.out.println(client.getVisualDump("non-instrumened"));
+        System.out.println(client.getVisualDump("non-instrumented"));
         client.setProperty("safari.webview.include","true");
-        System.out.println(client.getVisualDump("non-instrumened"));
+        System.out.println(client.getVisualDump("non-instrumented"));
 
         if (client.getDeviceProperty("device.os").equals("ANDROID")) {
 //            client.install("C:\\Program Files (x86)\\Experitest\\SeeTest 12.1\\bin\\ipas\\eribank.apk", true, false);
@@ -88,7 +88,7 @@ public class SeeTestTest implements Runnable {
         String s = client.getDeviceLog();
 
         try {
-            client.getRemoteFile(s,300000,"c:\\temp");
+            client.getRemoteFile(s,300000,"client:\\temp");
         } catch (Exception e) {
             e.printStackTrace();
         }

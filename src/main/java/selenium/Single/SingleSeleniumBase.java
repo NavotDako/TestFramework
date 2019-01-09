@@ -1,6 +1,5 @@
 package selenium.Single;
 
-import com.experitest.reporter.junit4.ReporterRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -10,7 +9,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@RunWith(ReporterRunner.class)
 public class SingleSeleniumBase {
     protected URL url;
     protected RemoteWebDriver driver;

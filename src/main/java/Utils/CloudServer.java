@@ -58,12 +58,21 @@ public class CloudServer {
     }
 
     public enum CloudServerNameEnum {
-        MINE, QA, RELEASE, DIKLA, DEEP, ESXI, ATB
+        MINE, QA, RELEASE, DIKLA, DEEP, ESXI, ATB, SHAHAR
     }
 
     private void updateCloudDetails() {
 
         switch (cloudName) {
+            case SHAHAR:
+                HOST = "192.168.2.126";
+                PORT = "80";
+                USER = "admin2";
+                PASS = "Experitest2012";
+                PROJECT = "default";
+                SECURED = false;
+                ACCESSKEY = "eyJ4cC51Ijo0LCJ4cC5wIjoyLCJ4cC5tIjoiTVRVME5qZzBOalUzTnpFME53IiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NjIyMDY1NzcsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.7bPATsFfIsPmYEXMZuvAHwsLk27owJaJ03nt0QtcWj8";
+                break;
             case MINE:
                 HOST = "192.168.2.13";
                 PORT = "80";
