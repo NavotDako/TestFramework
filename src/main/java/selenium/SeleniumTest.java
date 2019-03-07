@@ -1,15 +1,13 @@
 package selenium;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.BrowserType;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import Utils.CloudServer;
-import Utils.Utilities;
+import utils.CloudServer;
+import utils.Utilities;
 
 import java.io.*;
 import java.net.MalformedURLException;

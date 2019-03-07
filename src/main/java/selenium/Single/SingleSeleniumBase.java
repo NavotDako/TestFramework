@@ -3,6 +3,7 @@ package selenium.Single;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -18,7 +19,7 @@ public class SingleSeleniumBase {
     public void setUp() {
 
         try {
-            url = new URL("https://atb.experitest.com/wd/hub");
+            url = new URL("https://fantasy.premierleague.com/a/leagues/standings/313/classic");
 
         } catch (MalformedURLException e) {
             e.printStackTrace();
