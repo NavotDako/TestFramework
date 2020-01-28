@@ -55,6 +55,7 @@ public class SeleniumTest implements Runnable {
 
     @Override
     public void run() {
+
         System.out.println(Utilities.getTime() + " " + threadName + ": Starting");
         RemoteWebDriver driver = null;
         String reportURL = null;
@@ -108,8 +109,6 @@ public class SeleniumTest implements Runnable {
 
             }
             System.out.println(Utilities.getTime() + " " + threadName + ": Done - Report - " + reportURL);
-
-
         }
 
     }

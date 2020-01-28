@@ -3,8 +3,7 @@ package mobile.parallel;
 
 import utils.CloudServer;
 import utils.Utilities;
-import mobile.OS_Type;
-import mobile.localSeeTest;
+import utils.OS_Type;
 
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
@@ -24,8 +23,7 @@ public class Parallel {
     static int CURRENT = 0;
 
     public static void main(String[] args) throws InterruptedException {
-//        Thread.sleep(60*1000*15);
-        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.SHAHAR);
+        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.MINE);
         List<String> devicesList = cloudServer.getAllAvailableDevices(OS_Type.ALL);
 
         ExecutorService executorService = Executors.newFixedThreadPool(devicesList.size());
@@ -34,21 +32,21 @@ public class Parallel {
 //        MAX = devicesList.size();// 2;
         System.out.println("Max Parallel - " + MAX);
 
-        for (int i = 0; i < devicesList.size(); i++) {
-            if (localSeeTestBool) {
-                localSeeTest s = new localSeeTest();
-                Thread t = new Thread(s);
-                t.start();
-            } else {
-                if (appium) {
-                    loop l = new loop(devicesList.get(i));
-                    res.add(executorService.submit(l));
-                } else {
-                    SeeTestTest test = new SeeTestTest(devicesList.get(i));
-                    res.add(executorService.submit(test));
-                }
-            }
-        }
+//        for (int i = 0; i < devicesList.size(); i++) {
+//            if (localSeeTestBool) {
+//                localSeeTest s = new localSeeTest();
+//                Thread t = new Thread(s);
+//                t.start();
+//            } else {
+//                if (appium) {
+//                    loop l = new loop(devicesList.get(i));
+//                    res.add(executorService.submit(l));
+//                } else {
+//                    SeeTestTest test = new SeeTestTest(devicesList.get(i));
+//                    res.add(executorService.submit(test));
+//                }
+//            }
+//        }
         System.out.println("Starting All Threads");
 
         for (Future re : res) {

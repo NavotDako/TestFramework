@@ -2,7 +2,6 @@ package utils;
 
 import org.apache.commons.codec.binary.Base64;
 import org.json.JSONObject;
-import mobile.OS_Type;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,13 +57,65 @@ public class CloudServer {
         return (String.format("%-20s\n%-10s\n%-20s\n", "HOST - " + HOST, "PORT - " + PORT, "USER - " + USER));
     }
 
+    public String getDeviceVersion(String udid) {
+        String[] devicePropertiesArray = getDeviceDetails(udid);
+        String deviceVersion = getDeviceProperty(devicePropertiesArray, "osVersion");
+        return deviceVersion;
+    }
+
     public enum CloudServerNameEnum {
-        MINE, QA, RELEASE, DIKLA, DEEP, ESXI, ATB, SHAHAR
+        MINE, QA, RELEASE, DIKLA, DEEP, ESXI, ATB, SHAHAR, MASTER, DBS, LIRAN, SALES, ORTAL
     }
 
     private void updateCloudDetails() {
 
         switch (cloudName) {
+
+            case ORTAL:
+                HOST = "192.168.2.191";
+                PORT = "80";
+                USER = "admin";
+                PASS = "Aa123456";
+                PROJECT = "default";
+                SECURED = false;
+                ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoxLCJ4cC5tIjoiTVRVMk16STNPVGM1TlRrNE5BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4Nzg2Mzk3OTYsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.DRYshGw9gvgzpQXRL5SGCqiz3l7Q1KTcQCJgyhwb0_Q";
+                break;
+            case SALES:
+                HOST = "https://sales.experitest.com";
+                PORT = "443";
+                USER = "eyal";
+                PASS = "Experitest2012";
+                PROJECT = "default";
+                SECURED = true;
+                ACCESSKEY = "eyJ4cC51IjoyMDQwMzEsInhwLnAiOjIsInhwLm0iOiJNVFUwTVRNME5qWTNPREU1T0EiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE4NTY3MDY2NzgsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.B0tPNwQNsRKyYNDkcJ4bfVNvjweYEGZGhvTMc1Ygo7I";
+                break;
+            case LIRAN:
+                HOST = "192.168.2.31";
+                PORT = "80";
+                USER = "admin";
+                PASS = "Experitest2012";
+                PROJECT = "default";
+                SECURED = true;
+                ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoyLCJ4cC5tIjoiTVRVd016SXhNekF3TURFd01BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4MjcyMzQyNzQsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.mpN_KLwp4bml3UvEZoxg2Sn-GRLwkTcQEL5G4U5N3nk";
+                break;
+            case DBS:
+                HOST = "https://dbs-sg.experitest.com";
+                PORT = "443";
+                USER = "omer";
+                PASS = "Experitest2012";
+                PROJECT = "default";
+                SECURED = true;
+                ACCESSKEY = "eyJ4cC51Ijo0OTQ3MTEsInhwLnAiOjExMjk3MSwieHAubSI6Ik1UVTFNamt3TmpBeU9EWTFPUSIsImFsZyI6IkhTMjU2In0.eyJleHAiOjE4NjgyNjYwMjgsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.34PsG1Ow-_Uc4QJ9id2K-CaU6fL2F0WhRBTixRj5dM8";
+                break;
+            case MASTER:
+                HOST = "https://mastercloud.experitest.com";
+                PORT = "443";
+                USER = "eyal";
+                PASS = "Experitest2012";
+                PROJECT = "default";
+                SECURED = true;
+                ACCESSKEY = "eyJ4cC51Ijo3LCJ4cC5wIjoyLCJ4cC5tIjoiTVRVME1qVTFNREU0TWpRNE9RIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NTc5Nzc2NjYsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.bk67gFsjtczZbRMvjxnowEFBi8yhx6YCeIWwIwWkqTI";
+                break;
             case SHAHAR:
                 HOST = "192.168.2.126";
                 PORT = "80";
@@ -75,13 +126,13 @@ public class CloudServer {
                 ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoyLCJ4cC5tIjoiTVRVMU1UWTROamt4TlRVd05RIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NjcwNDY5MTYsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.4kQVexJ5eD-tXxlbeKWWA_oVnBOBUmUSyxORKCoOhKA";
                 break;
             case MINE:
-                HOST = "192.168.2.13";
+                HOST = "192.168.2.170";
                 PORT = "80";
                 USER = "admin";
                 PASS = "Experitest2012";
                 PROJECT = "Default";
                 SECURED = false;
-                ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoyLCJ4cC5tIjoiTVRVMU1ERTFNekkyTURNNU1nIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NjU1MTMyNjEsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.s0_bzYrlAOIn8hujQH83eGk-3PxAzVC_p_ugThfi1x8";
+                ACCESSKEY = "eyJ4cC51Ijo4NywieHAucCI6MSwieHAubSI6Ik1UVTFPVFkwTlRJeE5qazVNZyIsImFsZyI6IkhTMjU2In0.eyJleHAiOjE4NzUwMDUyMTcsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.ysVIGIHlB1O4XCuZQ6dD5UamjbXazbSrH-AD6DdrIhw";
                 break;
             case ATB:
                 HOST = "https://atb.experitest.com";
@@ -102,12 +153,12 @@ public class CloudServer {
                 ACCESSKEY = "eyJ4cC51Ijo3LCJ4cC5wIjoyLCJ4cC5tIjoiTVRVek9UWTNORGMxTURRMk1nIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NTUwMzQ3NTAsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.EoVOoXLYA68RcIaBwT4KmV8uKYavfZHc9id9e0RCwgU";
                 break;
             case DEEP:
-                HOST = "https://qa-win2016.experitest.com";
+                HOST = "https://qa-deep.experitest.com";
                 PORT = "443";
-                USER = "admin";
+                USER = "navot";
                 PASS = "Experitest2012";
                 PROJECT = "default";
-                ACCESSKEY = "eyJ4cC51IjoxLCJ4cC5wIjoyLCJ4cC5tIjoiTVRVME9UZzNOVGd4TnpVMU9BIiwiYWxnIjoiSFMyNTYifQ.eyJleHAiOjE4NjUyMzU4MTgsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.z0JrY0SIIeQtkCAPQBFOBoLQ8v9zTfR7tEKI_Jk4O8s";
+                ACCESSKEY = "eyJ4cC51Ijo0MTM1MTMwNCwieHAucCI6MiwieHAubSI6Ik1UVTNOREkxTXpZMU5UWTVNZyIsImFsZyI6IkhTMjU2In0.eyJleHAiOjE4ODk2MTM2NTUsImlzcyI6ImNvbS5leHBlcml0ZXN0In0.qsimPnbskdSGt_n4Y8WbMQ3NUpVhIEn6yWcqWTSVuz8";
                 SECURED = true;
                 break;
             case DIKLA:
@@ -156,33 +207,40 @@ public class CloudServer {
     }
 
     public String getDeviceOSByUDID(String UDID) {
-        return getDeviceOS(result, UDID);
+        return getDeviceOS(UDID);
     }
 
-    private String getDeviceOS(String result, String udid) {
+    private String getDeviceOS(String udid) {
+        String[] devicePropertiesArray = getDeviceDetails(udid);
+        String deviceOs = getDeviceProperty(devicePropertiesArray, "deviceOs");
+        return deviceOs;
+    }
+
+    private String getDeviceProperty(String[] devicePropertiesArray, String deviceProperty) {
+        int j = 0;
+        String property = null;
+        while (j < devicePropertiesArray.length) {
+            if (devicePropertiesArray[j].contains(deviceProperty)) {
+                property = devicePropertiesArray[j].replace(deviceProperty + "=", "").trim().toLowerCase();
+                return property;
+            }
+            j++;
+        }
+        return property;
+    }
+
+    private String[] getDeviceDetails(String udid) {
         JSONObject jsonObject = new JSONObject(result);
         Map obj = jsonObject.toMap();
         List<Object> data = (List<Object>) obj.get("data");
-        Object[] devicesArray = data
+        Object[] devicesDetailsObjectsArray = data
                 .stream()
                 .filter(student -> ((Map) student).get("udid").equals(udid))
                 .toArray();
 
-        String[] devicePropertiesArray = devicesArray[0].toString().replace("{", "").replace("]", "").split(",");
-        int j = 0;
+        String[] devicesDetailsArray = devicesDetailsObjectsArray[0].toString().replace("{","").replace("}","").split(",");
 
-        boolean udidFlag = false;
-        boolean osFlag = false;
-        String deviceOs = null;
-        while (j < devicePropertiesArray.length && (!udidFlag || !osFlag)) {
-
-            if (devicePropertiesArray[j].contains("deviceOs")) {
-                deviceOs = devicePropertiesArray[j].replace("deviceOs=", "").trim().toLowerCase();
-                osFlag = true;
-            }
-            j++;
-        }
-        return deviceOs;
+        return devicesDetailsArray;
     }
 
     public List<String> getAllAvailableDevices(OS_Type enumOs) {

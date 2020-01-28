@@ -45,12 +45,6 @@ public class AppiumTest implements Runnable {
         }
     }
 
-    public static void main(String[] args) {
-        cloudServer = new CloudServer(CloudServer.CloudServerNameEnum.MINE);
-        AppiumTest test = new AppiumTest("HT51HWV00455", -1);
-        Thread t = new Thread(test);
-        t.start();
-    }
 
     @Override
     public void run() {
@@ -116,20 +110,12 @@ public class AppiumTest implements Runnable {
 
             dc.setCapability(AndroidMobileCapabilityType.APP_PACKAGE, "com.experitest.ExperiBank");
             dc.setCapability(AndroidMobileCapabilityType.APP_ACTIVITY, ".LoginActivity");
-//            System.out.println(Utilities.getTime() + "\t" + threadName + "\tCreating Android Driver...");
             driver = new NewAndroidDriver(new URL(url), dc);
-//            System.out.println(Utilities.getTime() + "\t" + threadName + "\tAndroid Driver Created");
         }
         reportURL = (String) driver.getCapabilities().getCapability("reportUrl");
         System.out.println(Utilities.getTime() + "\t" + threadName + " - Setup Passed - " + reportURL);
 
-//        driver.manage().timeouts().implicitlyWait()
         client = new SeeTestClient(driver);
-
-//        client.startLoggingDevice("c:\\Temp\\" + threadName + "\\" + Utilities.getTimeForFileName() + ".log");
-//        String s = client.uploadFile("C:\\Users\\DELL\\Desktop\\aaaaaa.jpg");
-//        System.out.println(s);
-//        client.run("adb push /private/var/folders/zz/zyxvpxvq6csfxvn_n0000000000000/T/headless/"+s+" /sdcard");
     }
 
     private void test() {
@@ -158,83 +144,12 @@ public class AppiumTest implements Runnable {
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//*[@id='sb_form_q']")).sendKeys("experitest");
         driver.findElement(By.xpath("//*[(@id='sbBtn' and @alt='Search') or (@id='sbBtn' and @type='submit') or @id='sb_form_go']")).click();
-//        driver.findElement(By.xpath("//*[@text='Experitest - Web & mobile app testing' or @text='https://experitest.com' or (@text='Experitest' and @class='MUxGbd v0nnCb') or (@text='https://experitest.com' and @class='qzEoUe')]")).click();
-//        driver.findElement(By.xpath("//*[@alt='Experitest Logo']"));
-        //  googleTest();
-        driver.findElement(By.xpath("//*[@text='Mobile App Testing Tools – Experitest']"));
+
+        driver.findElement(By.xpath("//*[@text='Experitest: Mobile App & Cross-Browser Testing End-to-End']"));
 
         client.setReportStatus("Passed", "NICE");
 
         logTestPassed();
-    }
-
-    private void googleTest() {
-        client.launch("http://www.google.com", true, true);
-//        driver.manage().timeouts().pageLoadTimeout(80, TimeUnit.SECONDS);
-
-        try {
-            driver.findElement(By.xpath("//G-FLAT-BUTTON")).click();
-        } catch (Exception e) {
-        }
-
-        try {
-            driver.findElement(By.xpath("//*[@id='infobar_close_button']")).click();
-        } catch (Exception e) {
-        }
-
-        driver.context("WEBVIEW_1");
-
-        driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
-        driver.findElement(By.xpath("//*[@name='q']")).sendKeys("experitest");
-        driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-
-        driver.findElement(By.xpath("//*[@class='Tg7LZd']")).click();
-
-        tryToHandleNativePopup("//*[@text='Change to English']");
-        tryToHandleNativePopup("//*[@id='button_secondary' and @text='Block']");
-        tryToHandleNativePopup("//*[@text='Change to English']");
-        tryToHandleWebPopup("//*[@text='Change to English' and @class='ZyXQnc']");
-
-        driver.findElement(By.xpath("//*[@text='https://experitest.com' or (@text='Experitest' and @class='MUxGbd v0nnCb') or (@text='https://experitest.com' and @class='qzEoUe')]")).click();
-        try {
-            driver.findElement(By.xpath("//*[@text='https://experitest.com' or (@text='Experitest' and @class='MUxGbd v0nnCb') or (@text='https://experitest.com' and @class='qzEoUe')]")).click();
-        } catch (Exception e) {
-        }
-
-        driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
-        try {
-            driver.findElement(By.xpath("//*[@alt='Experitest Logo']"));
-        } catch (Exception e) {
-            driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
-            try {
-                driver.findElement(By.xpath("//*[@text='https://experitest.com' or (@text='Experitest' and @class='MUxGbd v0nnCb') or (@text='https://experitest.com' and @class='qzEoUe')]")).click();
-            } catch (Exception e1) {
-            }
-
-            driver.manage().timeouts().pageLoadTimeout(90, TimeUnit.SECONDS);
-            driver.findElement(By.xpath("//*[@alt='Experitest Logo']"));
-
-        }
-    }
-
-    private void tryToHandleWebPopup(String pop) {
-        client.startStepsGroup("Finding " + pop);
-        String context = driver.getContext();
-        driver.context("WEBVIEW_1");
-
-        try {
-            new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(By.xpath(pop)));
-            Thread.sleep(2000);
-            driver.findElement(By.xpath(pop)).click();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath(pop)).click();
-            Thread.sleep(2000);
-            driver.findElement(By.xpath(pop)).click();
-        } catch (Exception e) {
-            driver.getPageSource();
-        }
-        driver.context(context);
-        client.stopStepsGroup();
     }
 
     private void tryToHandleNativePopup(String pop) {
@@ -277,7 +192,7 @@ public class AppiumTest implements Runnable {
             System.out.println(Utilities.getTime() + "\t" + threadName + " - getPageSource Failed");
         }
         try {
-            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\t -- Failed --\t" + String.format("%-40s", threadName) + "\t" + reportURL + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
+            Utilities.log(Utilities.getTime() + "\titeration - " + iteration + "\t#Failed\t" + String.format("%-40s", threadName) + "\t" + reportURL + "\t" + e.getMessage().substring(0, e.getMessage().indexOf("\n")));
         } catch (IOException e1) {
             e1.printStackTrace();
         }

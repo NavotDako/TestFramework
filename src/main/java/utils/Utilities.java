@@ -13,15 +13,16 @@ public class Utilities {
 
 
     public static String getTime() {
-        return Parallel.sdf.format(new Date(System.currentTimeMillis()))+":";
+        return Parallel.sdf.format(new Date(System.currentTimeMillis())) + ":";
     }
 
     public static String getTimeForFileName() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy-HH-mm-ss-SSS");
         return sdf.format(new Date(System.currentTimeMillis()));
     }
+
     public static synchronized void log(String message) throws IOException {
-        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("reports/report_"+time, true)));
+        PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter("reports/report_" + time + ".log", true)));
         writer.write(index + ". " + message + "\n");
         index++;
         writer.flush();
