@@ -89,7 +89,7 @@
         <dependency>
             <groupId>com.experitest</groupId>
             <artifactId>appium-seetest-extension</artifactId>
-            <version>12.9</version>
+            <version>12.12</version>
         </dependency>
 
         <!--<dependency>-->
@@ -108,7 +108,7 @@
         <dependency>
             <groupId>com.experitest</groupId>
             <artifactId>seetest-client</artifactId>
-            <version>12.8</version>
+            <version>12.12</version>
         </dependency>
 
         <dependency>
