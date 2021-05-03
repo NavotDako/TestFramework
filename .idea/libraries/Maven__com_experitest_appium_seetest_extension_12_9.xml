@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.experitest:appium-seetest-extension:12.9">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/experitest/appium-seetest-extension/12.9/appium-seetest-extension-12.9.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/experitest/appium-seetest-extension/12.9/appium-seetest-extension-12.9-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/experitest/appium-seetest-extension/12.9/appium-seetest-extension-12.9-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
